@@ -8,16 +8,24 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const auth = getAuth();
+    
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            navigation.navigate("Home")
+            // ...
+        } else {
+            // User is signed out
+            // ...
+            navigation.navigate("Login")
+        }
+    });
 
     function handleLogin() {
-        //Lógica de autenticação
-        // if (password === "123") {
-        //     navigation.navigate("Home")
-        // } else {
-        //     setError("Senha incorreta")
-        // }
 
-        const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 

@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import NewTask from "./Screens/NewTask";
 import Home from "./Screens/Home";
 import Login from "./Screens/Login";
+import { initializeApp } from 'firebase/app';
+import { initializeAuth } from "firebase/auth";
 
 export default function App() {
   const Stack  =createStackNavigator()
@@ -18,7 +20,11 @@ export default function App() {
     appId: "1:286207853954:web:30ea546362a78150457b9b"
   };
 
+  const app = initializeApp(firebaseConfig);
 
+  const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage)
+  })
 
   return (
     <PaperProvider>
