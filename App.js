@@ -9,6 +9,17 @@ import Login from "./Screens/Login";
 export default function App() {
   const Stack  =createStackNavigator()
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAV9Zrvxt-nt2HPB1oTmV7PDnqzbOPGMDY",
+    authDomain: "pillreminder-ce900.firebaseapp.com",
+    projectId: "pillreminder-ce900",
+    storageBucket: "pillreminder-ce900.appspot.com",
+    messagingSenderId: "286207853954",
+    appId: "1:286207853954:web:30ea546362a78150457b9b"
+  };
+
+
+
   return (
     <PaperProvider>
      <NavigationContainer>

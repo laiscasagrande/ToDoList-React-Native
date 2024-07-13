@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("")
@@ -10,11 +11,24 @@ export default function Login({ navigation }) {
 
     function handleLogin() {
         //Lógica de autenticação
-        if (password === "123") {
-            navigation.navigate("Home")
-        } else {
-            setError("Senha incorreta")
-        }
+        // if (password === "123") {
+        //     navigation.navigate("Home")
+        // } else {
+        //     setError("Senha incorreta")
+        // }
+
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                alert(user.email + "logado")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert("Não foi possível realizar o login")
+            });
 
     }
 
